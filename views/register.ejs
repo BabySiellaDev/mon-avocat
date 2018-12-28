@@ -1,2 +1,39 @@
-<%- include('partials/header'); %> <%- include('partials/navbar'); %> <%-
-include('partials/footer'); %>
+<%- include('partials/header'); %> <%- include('partials/navbar'); %>
+<div class="column is-6 is-offset-3" style="margin-top:10%">
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control">
+      <input id="email" class="input" type="text" placeholder="Email" />
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Password</label>
+    <div class="control">
+      <input
+        id="password"
+        class="input"
+        type="password"
+        placeholder="Shhh..."
+      />
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Confirm Password</label>
+    <div class="control">
+      <input
+        id="confirmpassword"
+        class="input"
+        type="password"
+        placeholder="please confirm"
+      />
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-primary is-fullwidth" onclick="signup()">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer'); %>
