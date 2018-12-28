@@ -23,9 +23,18 @@ app.use(require("body-parser").json({ extended: true }));
 app.use("/", require("express").static(__dirname + "/assets"));
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect(
+  process.env.DATABASE_URL,
+  err => console.log("connected to db")
+);
 
 app.use("/", require("./routers/page.router.js"));
+app.use("/api/v1/auth", require("./routers/auth.router.js"));
+app.use(
+  "/api/v1/profile",
+  require("./modules/middlewares/security/isUserLoggedIn.js"),
+  require("./routers/profile.router.js")
+);
 
 app.listen(3000);
 console.log("app is running on port 3000");
