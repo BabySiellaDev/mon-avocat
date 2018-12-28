@@ -6,9 +6,16 @@ app.use(
     saveUninitialized: false
   })
 );
+
+app.set("view engine", "ejs");
+app.use(require("body-parser").json({ extended: true }));
+
+app.use("/", require("express").static(__dirname + "/assets"));
+
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/test");
 
-app.get("/register", function(req, res) {
-  res.render("register");
-});
+app.use("/", require("./routers/page.router.js"));
+
+app.listen(3000);
+console.log("app is running on port 3000");
