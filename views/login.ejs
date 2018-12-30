@@ -1,28 +1,47 @@
 <%- include('partials/header'); %> <%- include('partials/navbar'); %>
-<div class="column is-6 is-offset-3" style="margin-top:10%">
-  <div class="field">
-    <label class="label">Email</label>
-    <div class="control">
-      <input id="email" class="input" type="text" placeholder="Email" />
+<div class="container box">
+  <div class="column is-6 is-offset-3">
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input id="email" class="input" type="text" placeholder="Email" />
+      </div>
     </div>
-  </div>
-  <div class="field">
-    <label class="label">Password</label>
-    <div class="control">
-      <input
-        id="password"
-        class="input"
-        type="password"
-        placeholder="Shhh..."
-      />
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder="Shhh..."
+        />
+      </div>
     </div>
-  </div>
-  <div class="field">
-    <div class="control">
-      <button class="button is-primary is-fullwidth" onclick="goprofile()">
-        Submit
-      </button>
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary is-fullwidth" onclick="login()">
+          Submit
+        </button>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  function login() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    axios
+      .post("/api/v1/auth/login", {
+        email,
+        password
+      })
+      .then(data => {
+        console.log("logged in");
+      })
+      .catch(error => {
+        console.log("can't login");
+      });
+  }
+</script>
 <%- include('partials/footer'); %>

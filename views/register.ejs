@@ -1,39 +1,45 @@
 <%- include('partials/header'); %> <%- include('partials/navbar'); %>
-<div class="column is-6 is-offset-3" style="margin-top:10%">
-  <div class="field">
-    <label class="label">Email</label>
-    <div class="control">
-      <input id="email" class="input" type="text" placeholder="Email" />
-    </div>
-  </div>
-  <div class="field">
-    <label class="label">Password</label>
-    <div class="control">
-      <input
-        id="password"
-        class="input"
-        type="password"
-        placeholder="Shhh..."
-      />
-    </div>
-  </div>
-  <div class="field">
-    <label class="label">Confirm Password</label>
-    <div class="control">
-      <input
-        id="confirmpassword"
-        class="input"
-        type="password"
-        placeholder="please confirm"
-      />
-    </div>
-  </div>
-  <div class="field">
-    <div class="control">
-      <button class="button is-primary is-fullwidth" onclick="signup()">
-        Submit
-      </button>
-    </div>
+<div class="container box">
+  <div class="column is-6 is-offset-3">
+    <%- include('partials/informations'); %>
   </div>
 </div>
+
+<script>
+  function register() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var cpassword = document.getElementById("confirmpassword").value;
+    var nom = document.getElementById("nom").value;
+    var prénom = document.getElementById("prénom").value;
+    var location = document.getElementById("location").value;
+    var spécialité = document.getElementById("spécialité").value;
+    if (
+      cpassword === password &&
+      nom &&
+      prénom &&
+      location &&
+      spécialité &&
+      email &&
+      password
+    ) {
+      axios
+        .post("/api/v1/auth/register", {
+          email,
+          password,
+          nom,
+          prénom,
+          location,
+          spécialité
+        })
+        .then(data => {
+          console.log("registered");
+        })
+        .catch(error => {
+          console.log("not registered");
+        });
+    } else alert("Données Manquantes");
+    return false;
+  }
+</script>
 <%- include('partials/footer'); %>
